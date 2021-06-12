@@ -9,3 +9,6 @@
 .vs
 .idea/
 dist/
+
+#Env files
+.env
