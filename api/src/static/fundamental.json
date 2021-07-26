@@ -4,6 +4,7 @@
   "durationInMinutes": 90,
   "questions": [
     {
+      "html":"",
       "question":"Quantos anos voce tem? XD",
       "choices":[
         "10",
@@ -14,6 +15,7 @@
       "answer":2
     },
     {
+      "html":"",
       "question":"Pergunta de exemplo, acerte:",
       "choices":[
         "Teste 0",
