@@ -66,7 +66,7 @@ function App() {
         </div>
           :
         <div>
-          {exam.error}
+          {exam.error === 'post_exam' ? <p>Sua prova já acabou!</p> : <p>Sua prova ainda não começou.</p>}
         </div> 
       }</>
       :
