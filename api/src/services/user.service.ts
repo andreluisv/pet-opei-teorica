@@ -74,14 +74,12 @@ userService.post('/', async (req, res) => {
     const resposta = req.body.resposta;
     const user: any = await rep.findOneUser(ra);
     if (!user) {
-        res.status(404);
-        res.send('RA não cadastrado');
+        res.send({ 'error': 'RA não cadastrado' })
         return;
     }
 
     if (user.cpf != cpf) {
-        res.status(404);
-        res.send('CPF mismatch');
+        res.send({ 'error': 'CPF mismatch' })
         return;
     }
 

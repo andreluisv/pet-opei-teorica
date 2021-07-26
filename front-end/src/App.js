@@ -29,9 +29,13 @@ function App() {
       ok = false;
     }
 
-    if (ok){
-      setRegisterSubmit(true);
-    }
+    if (!ok) return;
+
+    setRegisterSubmit(true);
+
+    axios.get(`http://localhost:3333/user?cpf=${values.cpf}&ra=${values.ra}`).then(res => {
+      console.log(res);
+    });
   };
 
   return (
