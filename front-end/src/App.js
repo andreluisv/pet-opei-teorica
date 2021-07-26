@@ -47,7 +47,6 @@ function App() {
     setRegisterSubmit(true);
 
     axios.get(`http://localhost:3333/user?cpf=${values.cpf}&ra=${values.ra}`).then(res => {
-      console.log(res);
       if (res.error) return;
       updateExamRequest({
         status: res.data.status,
@@ -61,10 +60,15 @@ function App() {
   return (
     <div className="form-container">
       {registerSubmit ? 
-      <div>
-        {examDetails.name}
-        {exam.name}
-      </div> 
+      <>{examDetails.status === 1 ?
+        <div>
+          {exam.name}
+        </div>
+          :
+        <div>
+          {exam.error}
+        </div> 
+      }</>
       :
       <form className="register-form" onSubmit={handleSubmitRegisterForm}>
         <input
