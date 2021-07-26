@@ -12,6 +12,19 @@ function App() {
     cpfFieldEmpty: false,
     raFieldEmpty: false,
   });
+  const [examDetails, updateExamRequest] = useState({
+    status: 0,
+    modalidade: "",
+    name: "",
+  });
+  const [exam, updateExam] = useState({
+    name: "",
+    durationInMinutes: 0,
+    error: "",
+    questions: [],
+    startDate: "",
+    page: 0
+  });
 
   const handleCpfInputChange = (event) => {
     setValues({...values, cpf: event.target.value});
@@ -35,6 +48,13 @@ function App() {
 
     axios.get(`http://localhost:3333/user?cpf=${values.cpf}&ra=${values.ra}`).then(res => {
       console.log(res);
+      if (res.error) return;
+      updateExamRequest({
+        status: res.data.status,
+        modalidade: res.data.modalidade,
+        name: res.data.name,
+      });
+      updateExam({...exam, ...res.data.prova});
     });
   };
 
@@ -42,7 +62,8 @@ function App() {
     <div className="form-container">
       {registerSubmit ? 
       <div>
-        <p>submitted</p>
+        {examDetails.name}
+        {exam.name}
       </div> 
       :
       <form className="register-form" onSubmit={handleSubmitRegisterForm}>
