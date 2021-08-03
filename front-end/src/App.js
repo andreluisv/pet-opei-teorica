@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import Clock from './components/tickingClock/index';
+import ExamForms from './components/examForms/index';
 import "./index.css";
 
 function App() {
   const [registerSubmit, setRegisterSubmit] = useState(false);
+  const [startedExam, setStartedExam] = useState(false);
   const [values, setValues] = useState({
     cpf: "",
     ra: "",
@@ -33,6 +35,10 @@ function App() {
   const handleRaInputChange = (event) => {
     setValues({ ...values, ra: event.target.value });
   };
+
+  const handleStartExam = (event) => {
+    setStartedExam(true);
+  }
 
   const handleSubmitRegisterForm = (event) => {
     event.preventDefault();
@@ -69,13 +75,21 @@ function App() {
       <div className="form-container">
         {registerSubmit ?
           <>{examDetails.status === 1 ?
-            <div>
-              <p>{exam.name}</p>
-              <p>Questions: {exam.questions.length}</p>
-              <button className="form-field">
-                Iniciar
-              </button>
-            </div>
+            <>{startedExam ?
+              <div>
+                <ExamForms
+                  questions={exam.questions}
+                />
+              </div>
+              :
+              <div>
+                <p>{exam.name}</p>
+                <p>Questions: {exam.questions.length}</p>
+                <button className="form-field" onClick={handleStartExam}>
+                  Iniciar
+                </button>
+              </div>
+            }</>
             :
             <div>
               {exam.error === 'ra_notfound' ? <p>Usuário com este RA não existe.</p> : null}
