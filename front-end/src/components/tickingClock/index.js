@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./index.css";
 
 const calculateTimeLeft = (start, duration) => {
@@ -14,16 +14,8 @@ const calculateTimeLeft = (start, duration) => {
 
   return timeleft;
 }
-/*
-useEffect(() => {
-      const timer = setTimeout(() => { 
-        this.setState(timeLeft, calculateTimeLeft((new Date(this.props.startDate)).getTime(), this.props.durationInMinutes * 60 * 1000));
-      }, 1000)
-    })
-*/
 
 class Clock extends React.Component {
-  //calculateTimeLeft((new Date(this.props.startDate)).getTime(), this.props.durationInMinutes*60*1000)
   constructor(props) {
     super(props);
     this.state = {
