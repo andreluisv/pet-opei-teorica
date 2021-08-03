@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import Clock from './components/tickingClock/index';
 import "./index.css";
 
 function App() {
@@ -58,13 +59,19 @@ function App() {
   };
 
   return (
+    <>
+    {(registerSubmit && examDetails.status === 1) ? <Clock startDate={exam.startDate} durationInMinutes={exam.durationInMinutes}/> : null}
     <div className="form-container">
       {registerSubmit ? 
       <>{examDetails.status === 1 ?
         <div>
-          {exam.name}
+          <p>{exam.name}</p>
+          <p>Questions: {exam.questions.length}</p>
+          <button className="form-field">
+            Iniciar
+          </button>
         </div>
-          :
+        :
         <div>
           {exam.error === 'post_exam' ? <p>Sua prova já acabou!</p> : <p>Sua prova ainda não começou.</p>}
         </div> 
@@ -96,6 +103,7 @@ function App() {
         </button>
       </form>}
     </div>
+    </>
   );
 }
 
