@@ -52,7 +52,11 @@ class ExamForms extends React.Component {
       <>
         <div>
           {this.state.choices ? this.state.choices.map((ele, i) => {
-            return this.state.choices[i] + " ";
+            const idx = this.state.choices[i];
+            if (idx == -1) {
+              return "x ";
+            }
+            return (String.fromCharCode(97 + Number(idx))) + " ";
           }) : null}
         </div>
         <p>
@@ -64,7 +68,7 @@ class ExamForms extends React.Component {
         <div>
           {this.props.questions[this.state.index].choices.map((option, idx) => {
             return <div key={this.state.index + "-" + idx}>
-              {this.returnCheckedOrNotInput(idx)} {option}
+              {this.returnCheckedOrNotInput(idx)} {String.fromCharCode(97 + Number(idx))}) {option}
             </div>
           })}
         </div>
