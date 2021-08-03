@@ -4,26 +4,52 @@
   "durationInMinutes": 90,
   "questions": [
     {
-      "html":"",
-      "question":"Quantos anos voce tem? XD",
+      "text":"Karulina foi a um mercado de sua vizinhança com o intuito de comprar suprimentos para sua casa. Sendo uma cliente muito complicada e fissurada por matemática, ela se preparou e levou a carteira com várias cédulas de diferentes valores que ela possuía no momento.",
+      "question":"Sabendo que Karulina levou seis cédulas de 2 reais, quatro cédulas de 5 reais, duas cédulas de 10 reais e uma cédula de 20 reais, qual o menor número de cédulas que Karulina poderia utilizar para pagar a conta de 51 reais?",
       "choices":[
-        "10",
-        "11",
-        "12",
-        "13"
+        "4",
+        "5",
+        "6",
+        "7",
+        "9"
       ],
       "answer":2
     },
     {
-      "html":"",
-      "question":"Pergunta de exemplo, acerte:",
+      "text":"Karulina foi a um mercado de sua vizinhança com o intuito de comprar suprimentos para sua casa. Sendo uma cliente muito complicada e fissurada por matemática, ela se preparou e levou a carteira com várias cédulas de diferentes valores que ela possuía no momento.",
+      "question":"Sabendo que Karulina levou seis cédulas de 2 reais, três cédulas de 5 reais, duas cédulas de 10 e uma cédula de 20 reais, ajude-a dizendo de quantas maneiras ela pode escolher entre as cédulas de forma a efetuar o pagamento de 22 reais?",
       "choices":[
-        "Teste 0",
-        "Teste 1",
-        "Teste 2",
-        "Teste 3"
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
       ],
-      "answer":0
+      "answer":2
+    },
+    {
+      "text":"Karulina foi a um mercado de sua vizinhança com o intuito de comprar suprimentos para sua casa. Sendo uma cliente muito complicada e fissurada por matemática, ela se preparou e levou a carteira com várias cédulas de diferentes valores que ela possuía no momento.",
+      "question":"Dessa vez, Karulina levou somente uma cédula de 5 reais, uma cédula de 10 reais e uma cédula de 20 reais. Porém, o mercado estava sem troco no momento e Karulina teria que dar um jeito de trocar algumas de suas cédulas por um conjunto de cédulas(ou moedas) de valor menor em um comércio vizinho. Considerando que o pagamento era de 29 reais, qual a menor soma do número de cédulas com o número de moedas, após as trocas, que Karulina precisa ter para que não necessite de troco (devolução de dinheiro) na hora de pagar?",
+      "choices":[
+        "3",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer":2
+    },
+    {
+      "text":"Karulina foi a um mercado de sua vizinhança com o intuito de comprar suprimentos para sua casa. Sendo uma cliente muito complicada e fissurada por matemática, ela se preparou e levou a carteira com várias cédulas de diferentes valores que ela possuía no momento.",
+      "question":"Certo dia, Karulina foi ao mercado com duas cédulas de 2 reais, uma cédula de 5 reais e uma cédula de 10 reais. Porém, ela precisa saber exatamente o quanto pode gastar com o que tem na carteira e precisa de sua ajuda. Considerando todas as cédulas que ela tem, quantas são todas as possíveis somas utilizando, no máximo, as 4 cédulas de sua carteira.",
+      "choices":[
+        "8",
+        "9",
+        "11",
+        "13",
+        "15"
+      ],
+      "answer":2
     }
   ]
 }

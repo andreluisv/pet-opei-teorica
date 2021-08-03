@@ -34,12 +34,12 @@ userService.get('/', async (req, res) => {
     const ra = req.query.ra, cpf = req.query.cpf;
     const user: any = await rep.findOneUser(ra);
     if (!user) {
-        res.send({ 'error': 'RA não cadastrado' })
+        res.send({ 'error': 'ra_notfound' });
         return;
     }
 
     if (user.cpf != cpf) {
-        res.send({ 'error': 'CPF mismatch' });
+        res.send({ 'error': 'cpf_notfound' });
         return;
     }
 
@@ -74,12 +74,12 @@ userService.post('/', async (req, res) => {
     const resposta = req.body.resposta;
     const user: any = await rep.findOneUser(ra);
     if (!user) {
-        res.send({ 'error': 'RA não cadastrado' })
+        res.send({ 'error': 'ra_notfound' });
         return;
     }
 
     if (user.cpf != cpf) {
-        res.send({ 'error': 'CPF mismatch' })
+        res.send({ 'error': 'cpf_notfound' });
         return;
     }
 

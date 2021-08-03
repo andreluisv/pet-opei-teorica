@@ -48,7 +48,13 @@ function App() {
     setRegisterSubmit(true);
 
     axios.get(`http://localhost:3333/user?cpf=${values.cpf}&ra=${values.ra}`).then(res => {
-      if (res.error) return;
+      if (res.error){
+        return;
+      }
+      if (res.data.error){
+        updateExam({...exam, error: res.data.error});
+        return;
+      }
       updateExamRequest({
         status: res.data.status,
         modalidade: res.data.modalidade,
@@ -73,7 +79,10 @@ function App() {
         </div>
         :
         <div>
-          {exam.error === 'post_exam' ? <p>Sua prova já acabou!</p> : <p>Sua prova ainda não começou.</p>}
+          {exam.error === 'ra_notfound' ? <p>Usuário com este RA não existe.</p> : null}
+          {exam.error === 'cpf_notfound' ? <p>CPF errado!</p> : null}
+          {exam.error === 'post_exam' ? <p>Sua prova já acabou!</p> : null}
+          {exam.error === 'pre_exam' ? <p>Sua prova ainda não começou.</p> : null}
         </div> 
       }</>
       :

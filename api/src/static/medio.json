@@ -1,29 +1,55 @@
 {
   "name": "OPEI 2021 - Prova Teórica nível Médio",
-  "startDate": "2021-07-19T18:30:00.000Z",
-  "durationInMinutes": 90,
+  "startDate": "2021-08-03T00:30:00.000Z",
+  "durationInMinutes": 1440,
   "questions": [
     {
-      "html":"",
-      "question":"Quantos anos voce tem?",
+      "text":"Safira é uma jovem que ama ir à academia. Porém, por causa das várias atividades que se meteu, ela não consegue ir todos os dias. Porém, ela conseguiu organizar seu calendário de forma que, em cada mês, tenha uma sequência de dias para se exercitar.",
+      "question":"Considere que, em um mês de 31 dias, Safira foi à academia no dia 4, que era uma segunda-feira, e que ela vai na academia a cada 2 dias. Em qual dia será a próxima segunda-feira que a Safira estará na academia após o dia 4?",
       "choices":[
-        "10",
-        "11",
-        "12",
-        "13"
+        "18",
+        "16",
+        "26",
+        "20",
+        "22"
       ],
       "answer":2
     },
     {
-      "html":"",
-      "question":"Pergunta de exemplo, acerte:",
+      "text":"Safira é uma jovem que ama ir à academia. Porém, por causa das várias atividades que se meteu, ela não consegue ir todos os dias. Porém, ela conseguiu organizar seu calendário de forma que, em cada mês, tenha uma sequência de dias para se exercitar.",
+      "question":"Considere que, em um mês de 31 dias, Safira foi à academia no dia 2, que era um sábado, e que ela vai na academia a cada 3 dias. Quantos sábados desse mês Safira foi à academia?",
       "choices":[
-        "Teste 0",
-        "Teste 1",
-        "Teste 2",
-        "Teste 3"
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
       ],
-      "answer":0
+      "answer":2
+    },
+    {
+      "text":"Safira é uma jovem que ama ir à academia. Porém, por causa das várias atividades que se meteu, ela não consegue ir todos os dias. Porém, ela conseguiu organizar seu calendário de forma que, em cada mês, tenha uma sequência de dias para se exercitar.",
+      "question":"Considerando que, em um mês de 31 dias, Safira foi à academia somente nos dias que são múltiplos de 2 e 3, quantos dias desse mês Safira foi à academia?",
+      "choices":[
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answer":2
+    },
+    {
+      "text":"Safira é uma jovem que ama ir à academia. Porém, por causa das várias atividades que se meteu, ela não consegue ir todos os dias. Porém, ela conseguiu organizar seu calendário de forma que, em cada mês, tenha uma sequência de dias para se exercitar.",
+      "question":"Considere que, em um mês de 31 dias, Safira foi à academia a cada dois dias a partir do dia 01, que é uma quinta-feira, para se exercitar e, além disso, ela fazia natação a cada 4 dias começando no dia 02. Quantos dias desse mês Safira se exercitou?",
+      "choices":[
+        "12",
+        "14",
+        "16",
+        "18",
+        "20"
+      ],
+      "answer":2
     }
   ]
 }
