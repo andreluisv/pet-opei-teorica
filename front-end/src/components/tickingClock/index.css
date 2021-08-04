@@ -1,0 +1,15 @@
+.clockConstraint{
+  display: flex;
+  justify-content: center;
+  width: 180px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.display {
+  margin-bottom: 20px;
+}
+
+.display span {
+  font-size: 36px;
+}

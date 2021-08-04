@@ -42,11 +42,13 @@ class Clock extends React.Component {
 
   render() {
     return (
-      <>
-        <h2>
-          {this.state.timeLeft.hours}:{this.state.timeLeft.minutes}:{this.state.timeLeft.seconds}
-        </h2>
-      </>
+      <div className="clockConstraint">
+        <div className="display">
+          <span>{("0" + this.state.timeLeft.hours).slice(-2)}:</span>
+          <span>{("0" + this.state.timeLeft.minutes).slice(-2)}:</span>
+          <span>{("0" + this.state.timeLeft.seconds).slice(-2)}</span>
+        </div>
+      </div>
     );
   };
 
