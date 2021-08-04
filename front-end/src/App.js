@@ -79,6 +79,8 @@ function App() {
               <div>
                 <ExamForms
                   questions={exam.questions}
+                  cpf={values.cpf}
+                  ra={values.ra}
                 />
               </div>
               :

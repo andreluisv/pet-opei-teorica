@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import "./index.css";
 
 class ExamForms extends React.Component {
@@ -6,7 +7,8 @@ class ExamForms extends React.Component {
     super(props);
     this.state = {
       index: 0,
-      choices: new Array(this.props.questions.length).fill(-1)
+      choices: new Array(this.props.questions.length).fill(-1),
+      submitScreen: false,
     }
   }
 
@@ -17,15 +19,39 @@ class ExamForms extends React.Component {
   };
 
   handleNextPage = (event) => {
-    this.setState({ index: this.state.index + 1 });
+    const nxt = Math.min(this.state.index + 1, this.state.choices.length-1);
+    this.setState({ index: nxt });
   }
 
   handlePrevPage = (event) => {
-    this.setState({ index: this.state.index - 1 });
+    const nxt = Math.max(this.state.index - 1, 0);
+    this.setState({ index: nxt });
+  }
+
+  handleToggleSubmitScreen = (event) => {
+    this.setState({ submitScreen: true });
+  }
+
+  handleGoToIndexButton = (event) => {
+    this.setState({ index: event.target.value, submitScreen: false });
+  }
+
+  handleSubmitButton = (event) => {
+    axios.post(`http://localhost:3333/user`,{ra: this.props.ra, cpf: this.props.cpf, resposta: {choices: this.state.choices}}).then(res => {
+      if (res.status !== 200){
+        console.log("ops");
+        return;
+      }
+      if (res.data.error) {
+        console.log(res.data.error);
+        return;
+      }
+      console.log(res.data);
+    });
   }
 
   returnCheckedOrNotInput(idx) {
-    if (idx === this.state.choices[this.state.index]) {
+    if (idx === Number(this.state.choices[this.state.index])) {
       return <input
         onChange={this.handleQuestionSelectInputChange}
         value={idx}
@@ -48,33 +74,50 @@ class ExamForms extends React.Component {
   }
 
   render() {
-    return (
+    return (!this.state.submitScreen ?
       <>
         <div>
           {this.state.choices ? this.state.choices.map((ele, i) => {
             const idx = this.state.choices[i];
-            if (idx == -1) {
-              return "x ";
-            }
-            return (String.fromCharCode(97 + Number(idx))) + " ";
+            return (idx === -1 ? "x " : (String.fromCharCode(97 + Number(idx))) + " ");
           }) : null}
+          <button key="reviewAnswersButtons" onClick={this.handleToggleSubmitScreen}>Review</button>
         </div>
-        <p>
-          {this.props.questions[this.state.index].text}
-        </p>
-        <p>
-          {this.props.questions[this.state.index].question}
-        </p>
-        <div>
-          {this.props.questions[this.state.index].choices.map((option, idx) => {
-            return <div key={this.state.index + "-" + idx}>
-              {this.returnCheckedOrNotInput(idx)} {String.fromCharCode(97 + Number(idx))}) {option}
+        { this.props.questions && this.props.questions[this.state.index] ? 
+          <div>
+            <p>
+              {this.props.questions[this.state.index].text}
+            </p>
+            <p>
+              {this.props.questions[this.state.index].question}
+            </p>
+            <div>
+              {this.props.questions[this.state.index].choices.map((option, idx) => {
+                return <div key={this.state.index + "-" + idx}>
+                  {this.returnCheckedOrNotInput(idx)} {String.fromCharCode(97 + Number(idx))}) {option}
+                </div>
+              })}
             </div>
-          })}
-        </div>
+          </div>
+          : null
+        }
         <div>
-          {this.state.index > 0 ? <button onClick={this.handlePrevPage}>Previous</button> : null}
-          {this.state.index + 1 < this.state.choices.length ? <button onClick={this.handleNextPage}>Next</button> : null}
+          <button key="prevPageButton" onClick={this.handlePrevPage}>Previous</button>
+          <button key="nextPageButton" onClick={this.handleNextPage}>Next</button>
+        </div>
+      </>
+      :
+      <>
+        <div>
+          <div>
+            {
+              this.state.choices.map((val, i) => {
+                const idx = this.state.choices[i];
+                return <button className={idx===-1 ? "notAnsweredButton" : "answeredButton"} key={val + "x" + i} value={i} onClick={this.handleGoToIndexButton}>{i}) {(idx===-1 ? "x " : (String.fromCharCode(97 + Number(idx))) + " ")}</button>
+              })
+            }
+          </div>
+          <button onClick={this.handleSubmitButton}>Submit</button>
         </div>
       </>
     );
