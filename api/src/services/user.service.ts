@@ -30,8 +30,12 @@ function clearAnswersFromExam(exam:any){
     return exam;
 }
 
+function clearCpf(cpf:any){
+    return cpf.match(/\d+/g).join('');
+}
+
 userService.get('/', async (req, res) => {
-    const ra = req.query.ra, cpf = req.query.cpf;
+    const ra = req.query.ra, cpf = clearCpf(req.query.cpf);
     const user: any = await rep.findOneUser(ra);
     if (!user) {
         res.send({ 'error': 'ra_notfound' });
@@ -70,7 +74,7 @@ userService.get('/', async (req, res) => {
 });
 
 userService.post('/', async (req, res) => {
-    const ra = req.body.ra, cpf = req.body.cpf;
+    const ra = req.body.ra, cpf = clearCpf(req.body.cpf);
     const resposta = req.body.resposta;
     const user: any = await rep.findOneUser(ra);
     if (!user) {

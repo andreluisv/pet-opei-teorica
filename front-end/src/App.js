@@ -29,7 +29,7 @@ function App() {
   });
 
   const handleCpfInputChange = (event) => {
-    setValues({ ...values, cpf: event.target.value });
+    setValues({ ...values, cpf: cpfMask(event.target.value) });
   };
 
   const handleRaInputChange = (event) => {
@@ -38,6 +38,15 @@ function App() {
 
   const handleStartExam = (event) => {
     setStartedExam(true);
+  }
+
+  const cpfMask = value => {
+    return value
+      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
   }
 
   const handleSubmitRegisterForm = (event) => {
@@ -116,6 +125,7 @@ function App() {
             <input
               onChange={handleCpfInputChange}
               value={values.cpf}
+              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
               id="cpf-field"
               className="form-field"
               type="text"
