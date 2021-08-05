@@ -39,14 +39,14 @@ class ExamForms extends React.Component {
   handleSubmitButton = (event) => {
     axios.post(`http://localhost:3333/user`, { ra: this.props.ra, cpf: this.props.cpf, resposta: { choices: this.state.choices } }).then(res => {
       if (res.status !== 200) {
-        console.log("ops");
+        alert("Error, tente novamente!");
         return;
       }
       if (res.data.error) {
-        console.log(res.data.error);
+        alert(res.data.error);
         return;
       }
-      console.log(res.data);
+      alert(res.data, "Sucesso");
     });
   }
 
@@ -81,6 +81,7 @@ class ExamForms extends React.Component {
             const idx = this.state.choices[i];
             return (idx === -1 ? "x " : (String.fromCharCode(97 + Number(idx))) + " ");
           }) : null}
+          <br/>
           <button key="reviewAnswersButtons" onClick={this.handleToggleSubmitScreen}>Review</button>
         </div>
         {this.props.questions && this.props.questions[this.state.index] ?
@@ -90,14 +91,14 @@ class ExamForms extends React.Component {
               if (element.type === "text")
                 return <p key={"text" + i}>{element.data}</p>;
               if (element.type === "image")
-                return <img className="textImage" src={element.data} key={"image" + i} />;
+                return <img className="textImage" src={element.data} key={"image" + i} alt="imagem do texto"/>;
               return null;
             }) : null}
             {this.props.questions[this.state.index].question ? this.props.questions[this.state.index].question.map((element, i) => {
               if (element.type === "text")
-                return <p key={"question" + i}>{i == 0 ? (Number(this.state.index) + 1) + ") " : null}{element.data}</p>;
+                return <p key={"question" + i}>{i === 0 ? (Number(this.state.index) + 1) + ") " : null}{element.data}</p>;
               if (element.type === "image")
-                return <img className="textImage" src={element.data} key={"image" + i} />;
+                return <img className="textImage" src={element.data} key={"image" + i} alt="imagem da questao"/>;
               return null;
             }) : null}
             <div>
@@ -126,6 +127,7 @@ class ExamForms extends React.Component {
               })
             }
           </div>
+          <br/>
           <button onClick={this.handleSubmitButton}>Submit</button>
         </div>
       </>

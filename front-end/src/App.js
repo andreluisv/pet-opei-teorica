@@ -87,6 +87,7 @@ function App() {
               <div>
                 <p>{exam.name}</p>
                 <p>Questions: {exam.questions.length}</p>
+                <p>Notas: Anote suas respostas num papel caso haja algum problema com seu navegador.</p>
                 <button className="form-field" onClick={handleStartExam}>
                   Iniciar
                 </button>
