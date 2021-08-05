@@ -19,7 +19,7 @@ class ExamForms extends React.Component {
   };
 
   handleNextPage = (event) => {
-    const nxt = Math.min(this.state.index + 1, this.state.choices.length-1);
+    const nxt = Math.min(this.state.index + 1, this.state.choices.length - 1);
     this.setState({ index: nxt });
   }
 
@@ -37,8 +37,8 @@ class ExamForms extends React.Component {
   }
 
   handleSubmitButton = (event) => {
-    axios.post(`http://localhost:3333/user`,{ra: this.props.ra, cpf: this.props.cpf, resposta: {choices: this.state.choices}}).then(res => {
-      if (res.status !== 200){
+    axios.post(`http://localhost:3333/user`, { ra: this.props.ra, cpf: this.props.cpf, resposta: { choices: this.state.choices } }).then(res => {
+      if (res.status !== 200) {
         console.log("ops");
         return;
       }
@@ -83,14 +83,23 @@ class ExamForms extends React.Component {
           }) : null}
           <button key="reviewAnswersButtons" onClick={this.handleToggleSubmitScreen}>Review</button>
         </div>
-        { this.props.questions && this.props.questions[this.state.index] ? 
+        {this.props.questions && this.props.questions[this.state.index] ?
           <div>
-            <p>
-              {this.props.questions[this.state.index].text}
-            </p>
-            <p>
-              {this.props.questions[this.state.index].question}
-            </p>
+            <h2>{this.props.questions[this.state.index].bloco}</h2>
+            {this.props.questions[this.state.index].text ? this.props.questions[this.state.index].text.map((element, i) => {
+              if (element.type === "text")
+                return <p key={"text" + i}>{element.data}</p>;
+              if (element.type === "image")
+                return <img className="textImage" src={element.data} key={"image" + i} />;
+              return null;
+            }) : null}
+            {this.props.questions[this.state.index].question ? this.props.questions[this.state.index].question.map((element, i) => {
+              if (element.type === "text")
+                return <p key={"question" + i}>{i == 0 ? (Number(this.state.index) + 1) + ") " : null}{element.data}</p>;
+              if (element.type === "image")
+                return <img className="textImage" src={element.data} key={"image" + i} />;
+              return null;
+            }) : null}
             <div>
               {this.props.questions[this.state.index].choices.map((option, idx) => {
                 return <div key={this.state.index + "-" + idx}>
@@ -113,7 +122,7 @@ class ExamForms extends React.Component {
             {
               this.state.choices.map((val, i) => {
                 const idx = this.state.choices[i];
-                return <button className={idx===-1 ? "notAnsweredButton" : "answeredButton"} key={val + "x" + i} value={i} onClick={this.handleGoToIndexButton}>{i}) {(idx===-1 ? "x " : (String.fromCharCode(97 + Number(idx))) + " ")}</button>
+                return <button className={idx === -1 ? "notAnsweredButton" : "answeredButton"} key={val + "x" + i} value={i} onClick={this.handleGoToIndexButton}>{i + 1}) {(idx === -1 ? "x " : (String.fromCharCode(97 + Number(idx))) + " ")}</button>
               })
             }
           </div>

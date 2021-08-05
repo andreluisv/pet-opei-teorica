@@ -44,9 +44,9 @@ class Clock extends React.Component {
     return (
       <div className="clockConstraint">
         <div className="display">
-          <span>{("0" + this.state.timeLeft.hours).slice(-2)}:</span>
-          <span>{("0" + this.state.timeLeft.minutes).slice(-2)}:</span>
-          <span>{("0" + this.state.timeLeft.seconds).slice(-2)}</span>
+          <span>{("0" + (this.state.timeLeft.hours||0)).slice(-2)}:</span>
+          <span>{("0" + (this.state.timeLeft.minutes||0)).slice(-2)}:</span>
+          <span>{("0" + (this.state.timeLeft.seconds||0)).slice(-2)}</span>
         </div>
       </div>
     );
