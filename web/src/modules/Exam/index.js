@@ -10,6 +10,7 @@ const Exam = () => {
   const [username, setUserName] = useState('');
   const [credentials, setCredentials] = useState([]);
   const [examname, setExamName] = useState('');
+  const [endTime, setExamEndTime] = useState(0);
 
   const [showSideBar, setSideBar] = useState(true);
 
@@ -21,6 +22,7 @@ const Exam = () => {
       setUserName(local.nome);
       setCredentials([atob(local.cpf), local.ra])
       setExamName(local.prova);
+      setExamEndTime((new Date(local.date)).getTime() + local.duration*60*1000);
     }
   }, [])
 
@@ -37,7 +39,7 @@ const Exam = () => {
           <br />
           <p className="title">Tempo restante de prova</p>
           <div className="subtitle">
-            <Timer />
+            <Timer time={endTime}/>
           </div>
           <br />
           <p className="title">QUESTÕES</p>
