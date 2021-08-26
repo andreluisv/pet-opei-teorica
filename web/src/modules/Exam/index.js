@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Logo from '../../assets/logos/opei.svg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Timer from '../Timer/index';
+import QuestionButton from '../QuestionButton/index';
 
 const Exam = () => {
 
@@ -22,9 +23,19 @@ const Exam = () => {
       setUserName(local.nome);
       setCredentials([atob(local.cpf), local.ra])
       setExamName(local.prova);
-      setExamEndTime((new Date(local.date)).getTime() + local.duration*60*1000);
+      setExamEndTime((new Date(local.date)).getTime() + local.duration * 60 * 1000);
     }
   }, [])
+
+  const renderQuestionsButtons = () => {
+    return choices.map((val, i) => {
+      return <QuestionButton key={val + '-' + i} index={i} choice={val} />
+    })
+  }
+
+  const handleSubmit = () => {
+    console.log(credentials);
+  }
 
   return (
     <div className="container">
@@ -39,10 +50,15 @@ const Exam = () => {
           <br />
           <p className="title">Tempo restante de prova</p>
           <div className="subtitle">
-            <Timer time={endTime}/>
+            <Timer time={endTime} />
           </div>
           <br />
           <p className="title">QUESTÕES</p>
+          <div className="questions-buttons-container">
+            {renderQuestionsButtons()}
+          </div>
+          <button className="submit-exam-button" onClick={handleSubmit}>Entregar prova</button>
+          <p className="submit-exam-button-subtitle">Pode entregar a prova quantas vezes quiser, será avaliada apenas a última submissão.</p>
         </div>
       </div>
       <div className="question">

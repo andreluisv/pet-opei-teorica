@@ -1,6 +1,6 @@
 import './Timer.css'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Timer = ({ time }) => {
 

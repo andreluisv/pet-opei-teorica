@@ -24,7 +24,7 @@ function App() {
         </Switch>
 
       </Router>
-      <img src={Logo} className="svgicon" alter="bg-icon" />
+      <img src={Logo} className="svgicon" alt="bg-icon" />
     </div>
   );
 }

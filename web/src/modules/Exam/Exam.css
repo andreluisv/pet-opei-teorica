@@ -34,7 +34,7 @@
 
 .sidebar .content {
   padding-left: 10px;
-  padding-top: 25px;
+  padding-top: 14px;
 }
 
 .sidebar .title {
@@ -60,4 +60,28 @@
   margin-left: 50px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.125);
   border-radius: 53px;
+}
+
+.questions-buttons-container {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.submit-exam-button {
+  height: 37px;
+  width: 264px;
+  border-radius: 13px;
+  background: #2756B6;
+  text-align: center;
+  color: white;
+  margin-top: 15px;
+}
+
+.submit-exam-button-subtitle {
+  margin-top: 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #021C51;
 }
