@@ -87,3 +87,17 @@
   color: red;
   font-size: 12px;
 }
+
+.blocker {
+  position: absolute;
+  width: 500px;
+  height: 574px;
+  background-color: black;
+  opacity: 65%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.125);
+  border-radius: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
