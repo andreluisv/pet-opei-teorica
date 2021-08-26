@@ -46,7 +46,7 @@ const Login = () => {
     if (!validCpf || !validRa) return;
     setLoading(true);
     const cleanRA = sanitizeRa(ra), cleanCPF = sanitizeCpf(cpf);
-    var error = '';
+    var error = '', goToExam = false;
     try {
       const req = await request.get(`http://localhost:3333/user?ra=${cleanRA}&cpf=${cleanCPF}`);
       const data = req.data;
@@ -60,7 +60,19 @@ const Login = () => {
           else if (data.prova.error === 'pre_exam') error = `Olimpiada ainda não começou, tente novamente em: ${calculateTimeLeft(data.prova.startDate)}`;
           else error = 'Erro inesperado';
         } else {
-          history.push('/exam');
+          localStorage.setItem('opei-teorica', JSON.stringify({
+            ok: data.status === 1,
+            nome: data.name,
+            modalidade: data.modalidade,
+            duration: data.prova.durationInMinutes,
+            date: data.prova.startDate,
+            prova: data.prova.name,
+            questions: data.prova.questions,
+            choices: Array.from({ length: data.prova.questions.length }, () => -1),
+            ra: cleanRA,
+            cpf: btoa(cleanCPF),
+          }));
+          goToExam = true;
         }
       }
     } catch (e) {
@@ -68,6 +80,9 @@ const Login = () => {
     }
     setError(error);
     setLoading(false);
+    if (goToExam) {
+      history.push('/exam');
+    }
   }
 
   return (<>
