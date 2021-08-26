@@ -5,8 +5,10 @@ import { useState } from 'react';
 import { mask as maskCpf, validate as validateCpf, sanitize as sanitizeCpf } from '../../lib/utils/cpf';
 import { mask as maskRa, validate as validateRa, sanitize as sanitizeRa } from '../../lib/utils/ra';
 import CircleLoader from '../CircleLoader/index';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
+  const history = useHistory();
 
   const [cpf, setCPF] = useState('');
   const [ra, setRA] = useState('');
@@ -58,8 +60,7 @@ const Login = () => {
           else if (data.prova.error === 'pre_exam') error = `Olimpiada ainda não começou, tente novamente em: ${calculateTimeLeft(data.prova.startDate)}`;
           else error = 'Erro inesperado';
         } else {
-          //Change route
-          alert("SUCCESS");
+          history.push('/exam');
         }
       }
     } catch (e) {

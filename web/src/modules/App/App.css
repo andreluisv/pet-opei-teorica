@@ -1,8 +1,14 @@
-.App{
+.login {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.examArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .svgicon{
