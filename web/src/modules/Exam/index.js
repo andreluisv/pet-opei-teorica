@@ -4,6 +4,7 @@ import Logo from '../../assets/logos/opei.svg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Timer from '../Timer/index';
 import QuestionButton from '../QuestionButton/index';
+import CircleLoader from '../CircleLoader/index';
 
 const Exam = () => {
 
@@ -14,6 +15,7 @@ const Exam = () => {
   const [endTime, setExamEndTime] = useState(0);
 
   const [showSideBar, setSideBar] = useState(true);
+  const [showSubmitLoadindSpinner, setShowSubmitLoadingSpinner] = useState(false);
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem('opei-teorica'));
@@ -33,8 +35,14 @@ const Exam = () => {
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(credentials);
+    setShowSubmitLoadingSpinner(true);
+    const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) };
+    await sleep(1500);
+    setShowSubmitLoadingSpinner(false);
+    await sleep(100);
+    alert('Prova entregue com sucesso!')
   }
 
   return (
@@ -57,7 +65,12 @@ const Exam = () => {
           <div className="questions-buttons-container">
             {renderQuestionsButtons()}
           </div>
-          <button className="submit-exam-button" onClick={handleSubmit}>Entregar prova</button>
+          <div className="submit-exam-button-container">
+            <button className="submit-exam-button" onClick={handleSubmit}>Entregar prova</button>
+            <div style={{ opacity: (showSubmitLoadindSpinner ? '100%' : '0%') }} className="submit-exam-spinner">
+              <CircleLoader />
+            </div>
+          </div>
           <p className="submit-exam-button-subtitle">Pode entregar a prova quantas vezes quiser, será avaliada apenas a última submissão.</p>
         </div>
       </div>

@@ -67,6 +67,17 @@
   overflow-y: auto;
 }
 
+.submit-exam-button-container {
+  display: flex; 
+  align-items: center;
+}
+
+.submit-exam-spinner {
+  height: 24px;
+  width: 24px;
+  transform: scale(0.75);
+}
+
 .submit-exam-button {
   height: 37px;
   width: 264px;
