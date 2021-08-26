@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import Timer from '../Timer/index';
 import QuestionButton from '../QuestionButton/index';
 import CircleLoader from '../CircleLoader/index';
+import Question from '../Question/index';
 
 const Exam = () => {
 
@@ -13,9 +14,11 @@ const Exam = () => {
   const [credentials, setCredentials] = useState([]);
   const [examname, setExamName] = useState('');
   const [endTime, setExamEndTime] = useState(0);
+  const [questions, setQuestions] = useState([]);
 
   const [showSideBar, setSideBar] = useState(true);
   const [showSubmitLoadindSpinner, setShowSubmitLoadingSpinner] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState(-1);
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem('opei-teorica'));
@@ -26,12 +29,13 @@ const Exam = () => {
       setCredentials([atob(local.cpf), local.ra])
       setExamName(local.prova);
       setExamEndTime((new Date(local.date)).getTime() + local.duration * 60 * 1000);
+      setQuestions(local.questions);
     }
   }, [])
 
   const renderQuestionsButtons = () => {
     return choices.map((val, i) => {
-      return <QuestionButton key={val + '-' + i} index={i} choice={val} />
+      return <QuestionButton key={val + '-' + i} selected={selectedQuestion === i} index={i} choice={val} click={(idx) => { setSelectedQuestion(idx) }} />
     })
   }
 
@@ -75,7 +79,13 @@ const Exam = () => {
         </div>
       </div>
       <div className="question">
-
+        {selectedQuestion >= 0 && selectedQuestion < questions.length ?
+          <Question index={selectedQuestion} bloco={'Meu bloco'} choices={[]} question={[]} text={[]} />
+          :
+          <div>
+            <h1>Regras, dicas e talz</h1>
+          </div>
+        }
       </div>
     </div>
   );
