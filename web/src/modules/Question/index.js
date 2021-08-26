@@ -23,7 +23,7 @@ const Question = ({ index, bloco, choices, question, text, answer, changeChoice 
 
   const renderChoices = () => {
     return choices.map((obj, i) => {
-      return <div className="choice-button" style={i === answer ? { background: '#E7EFFF' } : null} onClick={() => { changeChoice(i) }}>
+      return <div key={'choice'+i} className="choice-button" style={i === answer ? { background: '#E7EFFF' } : null} onClick={() => { changeChoice(i) }}>
         <div className="choice-button-info">
           <p>{String.fromCharCode(97 + Number(i))}. </p>
           <span>{obj}</span>

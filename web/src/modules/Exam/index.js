@@ -6,6 +6,7 @@ import Timer from '../Timer/index';
 import QuestionButton from '../QuestionButton/index';
 import CircleLoader from '../CircleLoader/index';
 import Question from '../Question/index';
+import request from 'axios';
 
 const Exam = () => {
 
@@ -30,7 +31,7 @@ const Exam = () => {
       setUserName(local.nome);
       setCredentials([local.cpf, local.ra])
       setExamName(local.prova);
-      setExamEndTime((new Date(local.date)).getTime() + local.duration * 60 * 1000);
+      setExamEndTime((new Date(local.date)).getTime() + (local.duration * 60 * 1000));
       setQuestions(local.questions);
     }
   }, [])
@@ -48,13 +49,27 @@ const Exam = () => {
   }
 
   const handleSubmit = async () => {
-    console.log(credentials);
     setShowSubmitLoadingSpinner(true);
     const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) };
-    await sleep(1500);
+    const req = await request.post(`http://localhost:3333/user`, { cpf: atob(credentials[0]), ra: credentials[1], resposta: { choices: choices } });
+    var txt = 'Erro inesperado, tente novamente!';
+    if (req.status !== 200) {
+      txt = 'Error, tente novamente!';
+    }
+    if (req.data.error) {
+      txt = req.data.error;
+      if (txt === 'post_exam')
+        txt = 'Data limite de entrega finalizada!';
+      else if (txt === 'pre_exam')
+        txt = 'Prova ainda não começou!';
+    }
+    if (req.data === 'OK') {
+      txt = 'Prova submetida com sucesso às: ' + (new Date().toISOString());
+    }
+
     setShowSubmitLoadingSpinner(false);
     await sleep(100);
-    alert('Prova entregue com sucesso!')
+    alert(txt)
   }
 
   const handleChoiceChange = (idx) => {
