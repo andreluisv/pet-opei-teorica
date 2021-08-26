@@ -16,6 +16,7 @@ const Exam = () => {
   const [endTime, setExamEndTime] = useState(0);
   const [questions, setQuestions] = useState([]);
 
+  const [localStorageOk, setOk] = useState(false);
   const [showSideBar, setSideBar] = useState(true);
   const [showSubmitLoadindSpinner, setShowSubmitLoadingSpinner] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState(-1);
@@ -24,14 +25,21 @@ const Exam = () => {
     const local = JSON.parse(localStorage.getItem('opei-teorica'));
     if (local && local.ok) {
       console.log(local);
+      setOk(true);
       setChoices(local.choices);
       setUserName(local.nome);
-      setCredentials([atob(local.cpf), local.ra])
+      setCredentials([local.cpf, local.ra])
       setExamName(local.prova);
       setExamEndTime((new Date(local.date)).getTime() + local.duration * 60 * 1000);
       setQuestions(local.questions);
     }
   }, [])
+
+  const updateChoicesLocalStorage = (newChoices) => {
+    const obj = JSON.parse(localStorage.getItem('opei-teorica'));
+    obj.choices = newChoices;
+    localStorage.setItem('opei-teorica', JSON.stringify(obj));
+  }
 
   const renderQuestionsButtons = () => {
     return choices.map((val, i) => {
@@ -49,7 +57,14 @@ const Exam = () => {
     alert('Prova entregue com sucesso!')
   }
 
-  return (
+  const handleChoiceChange = (idx) => {
+    const newChoices = [...choices];
+    newChoices[selectedQuestion] = idx;
+    updateChoicesLocalStorage(newChoices);
+    setChoices(newChoices);
+  }
+
+  return (!localStorageOk ? <a href="/">Efetue login para visualizar esta página.</a> :
     <div className="container">
       <div className="sidebar">
         <button className="menu-icon" onClick={() => { setSideBar(!showSideBar) }}>
@@ -80,7 +95,15 @@ const Exam = () => {
       </div>
       <div className="question">
         {selectedQuestion >= 0 && selectedQuestion < questions.length ?
-          <Question index={selectedQuestion} bloco={'Meu bloco'} choices={[]} question={[]} text={[]} />
+          <Question
+            index={selectedQuestion}
+            bloco={questions[selectedQuestion].bloco}
+            choices={questions[selectedQuestion].choices}
+            question={questions[selectedQuestion].question}
+            text={questions[selectedQuestion].text}
+            answer={choices[selectedQuestion]}
+            changeChoice={handleChoiceChange}
+          />
           :
           <div>
             <h1>Regras, dicas e talz</h1>
