@@ -1,0 +1,11 @@
+.clock-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.clock-container p {
+  margin: 0;
+  margin-left: 9px;
+}

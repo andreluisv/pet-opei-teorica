@@ -1,7 +1,8 @@
 import './Exam.css'
 import { useEffect, useState } from 'react';
 import Logo from '../../assets/logos/opei.svg';
-import {GiHamburgerMenu} from 'react-icons/gi';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import Timer from '../Timer/index';
 
 const Exam = () => {
 
@@ -26,17 +27,19 @@ const Exam = () => {
   return (
     <div className="container">
       <div className="sidebar">
-        <button className="menu-icon" onClick={()=>{setSideBar(!showSideBar)}}>
+        <button className="menu-icon" onClick={() => { setSideBar(!showSideBar) }}>
           <GiHamburgerMenu />
         </button>
         <img src={Logo} alt="opei-logo" />
-        <div className="content" style={showSideBar ? null : {display: 'none'}}>
+        <div className="content" style={showSideBar ? null : { display: 'none' }}>
           <p className="title">{username}</p>
           <p className="subtitle">{examname}</p>
-          <br/>
+          <br />
           <p className="title">Tempo restante de prova</p>
-          <p className="subtitle">1:30:54</p>
-          <br/>
+          <div className="subtitle">
+            <Timer />
+          </div>
+          <br />
           <p className="title">QUESTÕES</p>
         </div>
       </div>
