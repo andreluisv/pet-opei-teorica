@@ -80,3 +80,24 @@ p {
   letter-spacing: 0em;
   text-align: justify;
 }
+
+.question-footer-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-footer-buttons p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  color: #2756B6;
+}
+
+.question-footer-buttons p:hover {
+  text-decoration: underline;
+}

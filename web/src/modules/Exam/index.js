@@ -79,6 +79,13 @@ const Exam = () => {
     setChoices(newChoices);
   }
 
+  const handleChangeQuestion = (val) => {
+    var newQ = selectedQuestion + val;
+    newQ = Math.min(newQ, choices.length - 1);
+    newQ = Math.max(newQ, 0);
+    setSelectedQuestion(newQ);
+  }
+
   return (!localStorageOk ? <a href="/">Efetue login para visualizar esta página.</a> :
     <div className="container">
       <div className="sidebar">
@@ -118,6 +125,7 @@ const Exam = () => {
             text={questions[selectedQuestion].text}
             answer={choices[selectedQuestion]}
             changeChoice={handleChoiceChange}
+            changeQuestion={handleChangeQuestion}
           />
           :
           <div>
