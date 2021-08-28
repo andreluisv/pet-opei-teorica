@@ -11,6 +11,7 @@ import {
 function App() {
   return (
     <div className="App">
+      <button style={{position: 'absolute'}} onClick={()=>{localStorage.setItem('opei-teorica', JSON.stringify({ ok: false }));}}>Logout temp</button>
       <Router>
         <Switch>
           <Route path='/exam'>
