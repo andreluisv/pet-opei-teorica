@@ -1,4 +1,4 @@
-FROM node:12.18.3
+FROM node:14.17.5
 
 LABEL version="1.0"
 LABEL description="This is the base docker image for the OPEI Teorica frontend react app."

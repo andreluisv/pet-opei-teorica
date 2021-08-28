@@ -42,6 +42,18 @@ const Login = () => {
     return `${timeleft.hours}h${timeleft.minutes}m`;
   }
 
+  const checkCompleteExamDetails = (data) => {
+    return data &&
+      data.name !== undefined &&
+      data.modalidade !== undefined &&
+      data.prova !== undefined &&
+      data.prova.durationInMinutes !== undefined &&
+      data.prova.startDate !== undefined &&
+      data.prova.name !== undefined &&
+      data.prova.questions !== undefined &&
+      data.status === 1;
+  }
+
   const handleSubmit = async () => {
     if (!validCpf || !validRa) return;
     setLoading(true);
@@ -53,15 +65,17 @@ const Login = () => {
       if (req.status !== 200) {
         error = 'Problema na requisição, tente novamente.';
       } else if (data.error) {
-        error = 'Combinação de CPF/RA incorreta, tente novamente.';
-      } else {
-        if (data.prova && data.prova.error) {
-          if (data.prova.error === 'post_exam') error = 'Olimpiada finalizada.';
-          else if (data.prova.error === 'pre_exam') error = `Olimpiada ainda não começou, tente novamente em: ${calculateTimeLeft(data.prova.startDate)}`;
+        error = data.error === 'exam_notfound' ? 'Erro ao localizar a prova.' : 'Combinação de CPF/RA incorreta, tente novamente.';
+        if (data.prova) {
+          if (data.status === 2 || data.prova.error === 'post_exam') error = 'Olimpiada finalizada.';
+          else if (data.status === 0 || data.prova.error === 'pre_exam') error = `Olimpiada ainda não começou, tente novamente em: ${calculateTimeLeft(data.prova.startDate)}`;
           else error = 'Erro inesperado';
-        } else {
+        }
+      } else {
+        const resultCheck = checkCompleteExamDetails(data);
+        if (resultCheck) {
           localStorage.setItem('opei-teorica', JSON.stringify({
-            ok: data.status === 1,
+            ok: true,
             nome: data.name,
             modalidade: data.modalidade,
             duration: data.prova.durationInMinutes,
@@ -73,7 +87,10 @@ const Login = () => {
             cpf: btoa(cleanCPF),
           }));
           goToExam = true;
+        } else {
+          error = 'Problema com a prova, contate nossa direção.';
         }
+
       }
     } catch (e) {
       error = 'Erro de conexão, tente novamente.'
@@ -82,6 +99,8 @@ const Login = () => {
     setLoading(false);
     if (goToExam) {
       history.push('/exam');
+    } else {
+      localStorage.setItem('opei-teorica', JSON.stringify({ ok: false }));
     }
   }
 
