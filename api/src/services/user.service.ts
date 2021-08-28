@@ -33,6 +33,7 @@ function clearCpf(cpf: any) {
 
 userService.get('/', async (req, res) => {
     const ra = req.query.ra, cpf = clearCpf(req.query.cpf);
+    console.log("GET /user", ra, cpf);
     if (!ra || !cpf) {
         res.send({ 'error': 'bad_request' });
         return;
@@ -83,6 +84,7 @@ userService.get('/', async (req, res) => {
 userService.post('/', async (req, res) => {
     const ra = req.body.ra, cpf = clearCpf(req.body.cpf);
     const resposta = req.body.resposta;
+    console.log("POST /user", ra, cpf, resposta);
     if (!ra || !cpf || !resposta) {
         res.send({ 'error': 'bad_request' });
         return;

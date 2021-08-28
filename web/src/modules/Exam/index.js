@@ -130,7 +130,7 @@ const Exam = () => {
           />
           :
           <div>
-            <h1>Regras, dicas e talz</h1>
+            <h1>Regras, dicas e talzz</h1>
           </div>
         }
       </div>

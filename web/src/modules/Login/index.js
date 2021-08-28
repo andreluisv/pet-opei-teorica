@@ -1,7 +1,7 @@
 import './Login.css';
 import request from 'axios';
 import Logo from '../../assets/logos/opei.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { mask as maskCpf, validate as validateCpf, sanitize as sanitizeCpf } from '../../lib/utils/cpf';
 import { mask as maskRa, validate as validateRa, sanitize as sanitizeRa } from '../../lib/utils/ra';
 import CircleLoader from '../CircleLoader/index';
@@ -53,6 +53,13 @@ const Login = () => {
       data.prova.questions !== undefined &&
       data.status === 1;
   }
+
+  useEffect(() => {
+    const local = JSON.parse(localStorage.getItem('opei-teorica'));
+    if (local && local.ok) {
+      history.push('/exam');
+    }
+  }, [])
 
   const handleSubmit = async () => {
     if (!validCpf || !validRa) return;
