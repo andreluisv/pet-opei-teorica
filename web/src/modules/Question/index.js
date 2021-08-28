@@ -9,6 +9,7 @@ const Question = ({ index, bloco, choices, question, text, answer, changeChoice,
         return <p key={'text-' + i}>{obj.data}</p>
       else if (obj.type === 'image')
         return <img key={'img-' + i} src={obj.data}></img>
+      return null;
     })
   }
 
@@ -18,6 +19,7 @@ const Question = ({ index, bloco, choices, question, text, answer, changeChoice,
         return <p key={'text-' + i} style={{ fontWeight: '500' }}>{obj.data}</p>
       else if (obj.type === 'image')
         return <img key={'img-' + i} src={obj.data}></img>
+      return null;
     })
   }
 

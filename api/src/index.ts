@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'
 import user from './services/user.service';
+import Router from 'express';
+
 
 
 const dotenv = require('dotenv');
@@ -18,9 +20,11 @@ mongoose.connect(process.env.MONGO_URL,
     });
 
 app.use('/user', user);
+// Test route
+app.use('/ok', Router().get('/', async (_, res) => { return res.sendStatus(200); }))
 
 const server = app.listen(port, () => {
-    console.log(`Servidor ouvindo na porta ${port}`);
+    console.log(`Servidor iniciado e ouvindo na porta ${port}`);
 })
 
 function closeServer(): void {

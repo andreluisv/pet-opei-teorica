@@ -25,7 +25,6 @@ const Exam = () => {
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem('opei-teorica'));
     if (local && local.ok) {
-      console.log(local);
       setOk(true);
       setChoices(local.choices);
       setUserName(local.nome);
@@ -62,6 +61,8 @@ const Exam = () => {
         txt = 'Data limite de entrega finalizada!';
       else if (txt === 'pre_exam')
         txt = 'Prova ainda não começou!';
+      else if (txt === 'exam_notfound')
+        txt = 'Prova não encontrada!';
     }
     if (req.data === 'OK') {
       txt = 'Prova submetida com sucesso às: ' + (new Date().toISOString());
@@ -129,7 +130,7 @@ const Exam = () => {
           />
           :
           <div>
-            <h1>Regras, dicas e talz</h1>
+            <h1>Regras, dicas e talzz</h1>
           </div>
         }
       </div>
