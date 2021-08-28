@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    env_file:
+        "./api/.env"
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    image: "opei-teorica/backend"
+    ports:
+      - "3333:3333"
+  frontend:
+    build:
+      context: ./web
+      dockerfile: ./Dockerfile
+    image: "opei-teorica/frontend"
+    ports:
+      - "3000:3000"
+    links:
+      - "backend"
