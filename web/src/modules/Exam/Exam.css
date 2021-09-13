@@ -8,23 +8,21 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 350px;
-  height: 740px;
-  margin-left: 100px;
+  width: 18vw;
+  height: 88vh;
+  margin-left: 10vw;
 }
 
 .sidebar img {
-  width: 147px;
-  height: 54px;
-  margin: 10px;
+  width: 8vw;
+  height: 5vh;
+  margin-top: 1vw;
+  margin-left: 1px;
 }
 
 .sidebar .menu-icon {
-  width: 24px;
-  height: 24px;
-  transform: scale(1.3);
-  margin-left: 10px;
-  margin-top: 10px;
+  width: 1.6vw;
+  height: 1.6vw;
   color: #2756B6;
 }
 
@@ -33,67 +31,208 @@
 }
 
 .sidebar .content {
-  padding-left: 10px;
-  padding-top: 14px;
+  padding-left: 2px;
+  padding-top: 4.6vh;
 }
 
 .sidebar .title {
-  height: 10px;
+  /* height: 10px; */
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.250vw;
   color: #021C51;
+  margin-block: 0;
+}
+
+.sidebar .title-2 {
+  /* height: 10px; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.833vw;
+  color: #021C51;
+  margin-block: 0;
 }
 
 .sidebar .subtitle {
-  height: 10px;
   font-style: normal;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 0.833vw;
   color: #021C51;
+  margin-block: 0;
+}
+
+.sidebar .subtitle-2 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.972vw;
+  color: #021C51;
+  margin-block: 0;
 }
 
 .question {
   background-color: white;
-  width: 800px;
-  height: 740px;
+  width: 55vw;
+  height: 88vh;
   overflow-y: auto;
-  margin-left: 50px;
+  margin-left: 5vw;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.125);
   border-radius: 53px;
 }
 
 .questions-buttons-container {
-  max-height: 320px;
-  overflow-y: auto;
+  height: 36vh;
+  overflow-y: scroll;
 }
 
 .submit-exam-button-container {
+  margin-top: 3.5vh;
+  width: 100%;
   display: flex; 
   align-items: center;
 }
 
 .submit-exam-spinner {
-  height: 24px;
-  width: 24px;
+  margin-right: -10%;
+  height: 1.6vw;
+  width: 1.6vw;
   transform: scale(0.75);
 }
 
 .submit-exam-button {
-  height: 37px;
-  width: 264px;
+  height: 4vh;
+  font-size: 0.972vw;
+  width: 100%;
   border-radius: 13px;
   background: #2756B6;
   text-align: center;
   color: white;
-  margin-top: 15px;
 }
 
 .submit-exam-button-subtitle {
-  margin-top: 0px;
+  margin-top: 1.1vh;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 0.833vw;
   line-height: 16px;
   color: #021C51;
+}
+
+@media (max-width: 425px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-inline: 6.6vw;
+    padding-top: 6vw;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .sidebar-header {
+
+  }
+  
+  .sidebar .menu-icon {
+    width: 5.8vw;
+    height: 5.8vw;
+    transform: scale(1.3);
+    color: #2756B6;
+    margin-top: 1.5vw;
+  }
+  .sidebar img {
+    width: 36vw;
+    height: 13vw;
+    float: right;
+    margin: 0;
+  }
+
+  .sidebar .title {
+    /* height: 10px; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4.380vw;
+    color: #021C51;
+    margin-block: 0;
+  }
+
+  .sidebar .title-2 {
+    /* height: 10px; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.920vw;
+    color: #021C51;
+    margin-block: 0;
+  }
+
+  .sidebar .subtitle {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 3.406vw;
+    color: #021C51;
+    margin-block: 0;
+  }
+
+  .sidebar .subtitle-2 {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 5vw;
+    color: #021C51;
+    margin-block: 0;
+  }
+
+  .questions-buttons-container {
+    height: auto;
+    overflow-y: scroll;
+  }
+
+  .submit-exam-button-container {
+    margin-top: 3.5vh;
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+  }  
+
+  .submit-exam-button {
+    height: 9.002vw;
+    font-size: 3.406vw;
+    width: 100%;
+    border-radius: 13px;
+    background: #2756B6;
+    text-align: center;
+    color: white;
+  }
+
+  .submit-exam-spinner {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    transform: scale(0.8);
+  }
+  
+  .submit-exam-button-subtitle {
+    margin-top: 1.1vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.920vw;
+    line-height: 16px;
+    color: #021C51;
+  }
+
+  .question {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    margin-left: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.125);
+    border-radius: 22px;
+  }
 }
