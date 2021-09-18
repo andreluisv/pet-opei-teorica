@@ -130,6 +130,7 @@ const Exam = () => {
             answer={choices[selectedQuestion]}
             changeChoice={handleChoiceChange}
             changeQuestion={handleChangeQuestion}
+            length = {questions.length}
           />
           :
           <div>

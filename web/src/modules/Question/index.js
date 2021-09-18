@@ -1,7 +1,7 @@
 import './Question.css'
 import { AiFillCheckCircle } from 'react-icons/ai';
 
-const Question = ({ index, bloco, choices, question, text, answer, changeChoice, changeQuestion }) => {
+const Question = ({ index, bloco, choices, question, text, answer, changeChoice, changeQuestion, length }) => {
 
   const renderText = () => {
     return text.map((obj, i) => {
@@ -45,8 +45,8 @@ const Question = ({ index, bloco, choices, question, text, answer, changeChoice,
       {renderQuestion()}
       {renderChoices()}
       <div className="question-footer-buttons">
-        <p onClick={() => { changeQuestion(-1) }}>{'<'} Ir para a questão anterior ({index})</p>
-        <p onClick={() => { changeQuestion(1) }}>Ir para a próxima questão ({index + 2}) {'>'}</p>
+        <p style={index > 0 ? {visibility: "visible"} : {visibility: "hidden"}} onClick={() => { changeQuestion(-1) }}>{'<'} Ir para a questão anterior ({index})</p>
+        <p style={index < length-1 ? {visibility: "visible"} : {visibility: "hidden"}} onClick={() => { changeQuestion(1) }}>Ir para a próxima questão ({index + 2}) {'>'}</p>
       </div>
     </div>
   );
