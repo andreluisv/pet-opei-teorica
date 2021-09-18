@@ -28,7 +28,7 @@ button:hover {
   transition: all .2s ease-in-out;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .svgicon{
     position: fixed;
     right: 0;

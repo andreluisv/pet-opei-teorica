@@ -103,7 +103,7 @@ p {
   text-decoration: underline;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .question-selected-container {
     padding: 5vw 5.839vw;
   }
@@ -169,6 +169,101 @@ p {
   .choice-button span{
     margin-left: 5vw;
     font-size: 3.406vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: justify;
+    color: #021C51;
+  }
+  
+  .choice-verified-icon {
+    color: #021C51;
+    transform: scale(1.5);
+    margin-block: auto;
+    width: 5.596vw;
+    height: 5.596vw;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .question-footer-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+
+}
+
+@media (min-width: 501px) and (max-width: 1024px) {
+  .question-selected-container {
+    padding: 4vw 3vw;
+  }
+  
+  .question-index-title {
+    width: 100%;
+    font-size: 3vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #021C51;
+    margin: 0;
+  }
+  
+  .question-bloco-title {
+    font-size: 2.5vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 31px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #021C51;
+    margin-block: 1.5vw;
+  }
+
+  .question-selected-container img {
+    width: 100%;
+  }
+
+  p {
+    font-size: 2vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: justify;
+  }
+
+  .choice-button {
+    display: flex;
+    height: auto;
+    border-radius: 9px;
+    border: 1px solid #2756B6;
+    margin-bottom: 3.650vw;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    padding-inline: 3.650vw;
+  }
+  
+  .choice-button p {
+    font-size: 2vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #2756B6;
+  }
+  
+  .choice-button span{
+    margin-left: 2vw;
+    font-size: 1.6vw;
     font-style: normal;
     font-weight: 700;
     line-height: 21px;
