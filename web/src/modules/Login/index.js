@@ -112,11 +112,6 @@ const Login = () => {
   }
 
   return (<>
-    <div className="blocker" style={!loading ? { display: 'none' } : null}>
-      <div style={{ opacity: '100%' }}>
-        <CircleLoader />
-      </div>
-    </div>
     <div className="box-container">
       <div className="logos">
         <img src={Logo} alt="opei-logo" />
@@ -126,7 +121,6 @@ const Login = () => {
       <div className="form">
         <p>RA</p>
         <span>O número do RA está disponível no e-mail de confirmação de inscrição.</span>
-        <br />
         <input
           className={ra ? (validRa ? 'valid' : 'notvalid') : ''}
           onChange={handleRaInputChange}
@@ -144,9 +138,12 @@ const Login = () => {
           placeholder=""
           name="cpf"
         />
+        {errorText ? <p className="error-dialog">{errorText}</p> : null}
       </div>
-      {errorText ? <p className="error-dialog">{errorText}</p> : null}
       <button onClick={handleSubmit} style={validCpf && validRa ? null : { background: 'grey', cursor: 'unset', transform: 'scale(1)' }} className="login-btn">Entrar</button>
+      <div style={{ display: (loading ? 'flex' : 'none') }} className="blocker">
+        <CircleLoader />
+      </div>
     </div>
   </>);
 }
