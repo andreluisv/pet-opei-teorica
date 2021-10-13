@@ -90,26 +90,29 @@ const Exam = () => {
   return (!localStorageOk ? <a href="/">Efetue login para visualizar esta página.</a> :
     <div className="container">
       <div className="sidebar">
+        <div className="sidebar-header">
         <button className="menu-icon" onClick={() => { setSideBar(!showSideBar) }}>
           <GiHamburgerMenu />
         </button>
         <img src={Logo} alt="opei-logo" />
+        </div>
+
         <div className="content" style={showSideBar ? null : { display: 'none' }}>
           <p className="title">{username}</p>
           <p className="subtitle">{examname}</p>
-          <br />
-          <p className="title">Tempo restante de prova</p>
-          <div className="subtitle">
+
+          <p className="title-2" style={{marginTop : '2.5vh'}} >TEMPO RESTANTE DE PROVA</p>
+          <div className="subtitle-2">
             <Timer time={endTime} />
           </div>
-          <br />
-          <p className="title">QUESTÕES</p>
+
+          <p className="title-2" style={{marginTop : '2.5vh'}}>QUESTÕES</p>
           <div className="questions-buttons-container">
             {renderQuestionsButtons()}
           </div>
           <div className="submit-exam-button-container">
             <button className="submit-exam-button" onClick={handleSubmit}>Entregar prova</button>
-            <div style={{ opacity: (showSubmitLoadindSpinner ? '100%' : '0%') }} className="submit-exam-spinner">
+            <div style={{ display: (showSubmitLoadindSpinner ? 'flex' : 'none') }} className="submit-exam-spinner">
               <CircleLoader />
             </div>
           </div>
@@ -127,6 +130,7 @@ const Exam = () => {
             answer={choices[selectedQuestion]}
             changeChoice={handleChoiceChange}
             changeQuestion={handleChangeQuestion}
+            length = {questions.length}
           />
           :
           <div>
