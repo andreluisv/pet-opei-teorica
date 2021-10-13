@@ -8,7 +8,7 @@ import CircleLoader from '../CircleLoader/index';
 import Question from '../Question/index';
 import request from 'axios';
 
-const Exam = () => {
+const Exam = ({backendUrl}) => {
 
   const [choices, setChoices] = useState([]);
   const [username, setUserName] = useState('');
@@ -50,7 +50,7 @@ const Exam = () => {
   const handleSubmit = async () => {
     setShowSubmitLoadingSpinner(true);
     const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) };
-    const req = await request.post(`http://localhost:3333/user`, { cpf: atob(credentials[0]), ra: credentials[1], resposta: { choices: choices } });
+    const req = await request.post(`${backendUrl}/user`, { cpf: atob(credentials[0]), ra: credentials[1], resposta: { choices: choices } });
     var txt = 'Erro inesperado, tente novamente!';
     if (req.status !== 200) {
       txt = 'Error, tente novamente!';

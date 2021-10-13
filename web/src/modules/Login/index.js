@@ -7,7 +7,7 @@ import { mask as maskRa, validate as validateRa, sanitize as sanitizeRa } from '
 import CircleLoader from '../CircleLoader/index';
 import { useHistory } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({backendUrl}) => {
   const history = useHistory();
 
   const [cpf, setCPF] = useState('');
@@ -67,7 +67,7 @@ const Login = () => {
     const cleanRA = sanitizeRa(ra), cleanCPF = sanitizeCpf(cpf);
     var error = '', goToExam = false;
     try {
-      const req = await request.get(`http://localhost:3333/user?ra=${cleanRA}&cpf=${cleanCPF}`);
+      const req = await request.get(`${backendUrl}/user?ra=${cleanRA}&cpf=${cleanCPF}`);
       const data = req.data;
       if (req.status !== 200) {
         error = 'Problema na requisição, tente novamente.';
