@@ -133,8 +133,14 @@ const Exam = ({backendUrl}) => {
             length = {questions.length}
           />
           :
-          <div>
-            <h1>Regras, dicas e talzz</h1>
+          <div className="recomendations">
+            <h1>Recomendações:</h1>
+            <p>Esta prova é composta por 5 Blocos de Questões com 4 Questões cada, totalizando 20 Questões. Abaixo estão alguma recomendações para uma boa execução da prova:</p>
+            <p>1. Lembre de anotar as suas respostas em um papel, em casos de queda de rede suas respostas podem ser perdidas ao sair e retornar para a prova.</p> 
+            <p>2. Você poderá submeter quantas vezes quiser até a hora limite de entrega, momento em que a aplicação será encerrada. E fique tranquilo que apenas a última submissão será contabilizada.</p> 
+            <p>3. Não envie a prova no último instante, recomendamos que reserve os últimos 15 minutos para revisar suas respostas e enviar sua versão final.</p>
+            <p>4. Em qualquer dúvida ou problema, entre em contato conosco diretamente mandando um e-mail para opei@cin.ufpe.br.</p> 
+            <p>Boa Prova!</p>
           </div>
         }
       </div>
