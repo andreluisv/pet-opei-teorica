@@ -74,8 +74,9 @@ const Login = ({backendUrl}) => {
       } else if (data.error) {
         error = data.error === 'exam_notfound' ? 'Erro ao localizar a prova.' : 'Combinação de CPF/RA incorreta, tente novamente.';
         if (data.prova) {
+          let exType = data.modalidade === 'medio' ? 'médio' : 'fundamental';
           if (data.status === 2 || data.prova.error === 'post_exam') error = 'Olimpiada finalizada.';
-          else if (data.status === 0 || data.prova.error === 'pre_exam') error = `Olimpiada ainda não começou, tente novamente em: ${calculateTimeLeft(data.prova.startDate)}`;
+          else if (data.status === 0 || data.prova.error === 'pre_exam') error = `Sua prova de nível ${exType} ainda não começou. Tente novamente em: ${calculateTimeLeft(data.prova.startDate)}`;
           else error = 'Erro inesperado';
         }
       } else {
