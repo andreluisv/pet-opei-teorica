@@ -10,7 +10,8 @@ import {
 
 function App() {
 
-  const backendUrl = "http://localhost:3333";
+  // const backendUrl = "http://localhost:3333";
+  const backendUrl = "https://pet-opei-teorica-back.herokuapp.com";
 
   return (
     <div className="App">

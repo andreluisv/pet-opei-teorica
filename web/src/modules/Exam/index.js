@@ -7,6 +7,7 @@ import QuestionButton from '../QuestionButton/index';
 import CircleLoader from '../CircleLoader/index';
 import Question from '../Question/index';
 import request from 'axios';
+import { AiFillQuestionCircle } from 'react-icons/ai';
 
 const Exam = ({backendUrl}) => {
 
@@ -99,7 +100,6 @@ const Exam = ({backendUrl}) => {
             <button className="menu-icon" onClick={() => { setSideBar(!showSideBar) }}>
               <GiHamburgerMenu />
             </button>
-            <h2 className="menu-recomendacoes" onClick={() => {setSelectedQuestion(-1)}} >Recomendações</h2>
           </div>
         <img src={Logo} alt="opei-logo" />
         </div>
@@ -112,8 +112,14 @@ const Exam = ({backendUrl}) => {
           <div className="subtitle-2">
             <Timer time={endTime} />
           </div>
-
-          <p className="title-2" style={{marginTop : '2.5vh'}}>QUESTÕES</p>
+          <div className="questions-recomend">
+            <p className="title-2">
+              QUESTÕES
+            </p>
+            <button className="question-recomendations" onClick={() => {setSelectedQuestion(-1)}}>
+              <AiFillQuestionCircle />
+            </button>
+          </div>
           <div className="questions-buttons-container">
             {renderQuestionsButtons()}
           </div>
