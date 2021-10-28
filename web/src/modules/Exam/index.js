@@ -65,7 +65,11 @@ const Exam = ({backendUrl}) => {
         txt = 'Prova não encontrada!';
     }
     if (req.data === 'OK') {
-      txt = 'Prova submetida com sucesso às: ' + (new Date().toISOString());
+      var dateAux = new Date();
+      console.log(dateAux);
+      let date = `${String(dateAux.getDate()).padStart(2,'0')}/${String(dateAux.getMonth() + 1).padStart(2, '0')}/${dateAux.getFullYear()}`;
+      let hour = `${dateAux.getHours()}:${String(dateAux.getMinutes()).padStart(2, '0')}:${dateAux.getSeconds()}`;
+      txt = `Prova submetida com sucesso às: ${date} de ${hour}`;
     }
 
     setShowSubmitLoadingSpinner(false);
@@ -91,9 +95,12 @@ const Exam = ({backendUrl}) => {
     <div className="container">
       <div className="sidebar">
         <div className="sidebar-header">
-        <button className="menu-icon" onClick={() => { setSideBar(!showSideBar) }}>
-          <GiHamburgerMenu />
-        </button>
+          <div className="sidebar-header-top">
+            <button className="menu-icon" onClick={() => { setSideBar(!showSideBar) }}>
+              <GiHamburgerMenu />
+            </button>
+            <h2 className="menu-recomendacoes" onClick={() => {setSelectedQuestion(-1)}} >Recomendações</h2>
+          </div>
         <img src={Logo} alt="opei-logo" />
         </div>
 

@@ -18,6 +18,19 @@
   flex-direction: column;
 }
 
+.sidebar-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-recomendacoes {
+  margin: 0;
+  font-size: 1.250vw;
+  color: #021C51;
+  font-weight: bold;
+}
+
 .sidebar img {
   width: 8vw;
   height: auto;
@@ -85,7 +98,7 @@
 }
 
 .questions-buttons-container {
-  height: auto;
+  height: 40vh;
   overflow-y: scroll;
 }
 
@@ -155,10 +168,6 @@
     height: 100%;
     margin: 0;
   }
-
-  .sidebar-header {
-
-  }
   
   .sidebar .menu-icon {
     width: 5.8vw;
@@ -167,6 +176,11 @@
     color: #2756B6;
     margin-top: 1.5vw;
   }
+
+  .menu-recomendacoes {
+    font-size: 4.380vw;
+  }
+
   .sidebar img {
     width: 36vw;
     height: 13vw;
@@ -209,7 +223,7 @@
   }
 
   .questions-buttons-container {
-    height: auto;
+    max-height: 40vh;
     overflow-y: scroll;
   }
 
@@ -283,6 +297,11 @@
     display: flex;
     flex-direction: column;
   }
+
+  .menu-recomendacoes {
+    font-size: 2.3vw;
+  }
+
   .sidebar .content {
     padding-top: 3vh;
   }
@@ -334,7 +353,7 @@
   }
 
   .questions-buttons-container {
-    height: auto;
+    max-height: 40vh;
     overflow-y: scroll;
   }
 
