@@ -13,6 +13,8 @@ const Exam = ({backendUrl}) => {
 
   const [choices, setChoices] = useState([]);
   const [username, setUserName] = useState('');
+  const [status, setStatus] = useState(0);
+  const [answers, setAnswers] = useState([]);
   const [credentials, setCredentials] = useState([]);
   const [examname, setExamName] = useState('');
   const [endTime, setExamEndTime] = useState(0);
@@ -33,6 +35,8 @@ const Exam = ({backendUrl}) => {
       setExamName(local.prova);
       setExamEndTime((new Date(local.date)).getTime() + (local.duration * 60 * 1000));
       setQuestions(local.questions);
+      setStatus(local.status);
+      setAnswers(local.answers);
     }
   }, [])
 
@@ -44,14 +48,16 @@ const Exam = ({backendUrl}) => {
 
   const renderQuestionsButtons = () => {
     return choices.map((val, i) => {
-      return <QuestionButton key={val + '-' + i} selected={selectedQuestion === i} index={i} choice={val} click={(idx) => { setSelectedQuestion(idx) }} />
+      return <QuestionButton key={val + '-' + i} selected={selectedQuestion === i} index={i} choice={val} answer={answers[i]} status={status} click={(idx) => { setSelectedQuestion(idx) }} />
     })
   }
 
   const handleSubmit = async () => {
     setShowSubmitLoadingSpinner(true);
     const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) };
-    const req = await request.post(`${backendUrl}/user`, { cpf: atob(credentials[0]), ra: credentials[1], resposta: { choices: choices } });
+    const ano = new Date().getFullYear();
+    const req = await request.post(`${backendUrl}/user/update`, 
+      { cpf: atob(credentials[0]), ra: credentials[1], ano: ano, resposta: { choices: choices } });
     var txt = 'Erro inesperado, tente novamente!';
     if (req.status !== 200) {
       txt = 'Error, tente novamente!';
@@ -108,10 +114,16 @@ const Exam = ({backendUrl}) => {
           <p className="title">{username}</p>
           <p className="subtitle">{examname}</p>
 
-          <p className="title-2" style={{marginTop : '2.5vh'}} >TEMPO RESTANTE DE PROVA</p>
-          <div className="subtitle-2">
-            <Timer time={endTime} />
-          </div>
+          {status == 2 ?
+            <p className="title-2" style={{marginTop : '2.5vh'}} >GABARITO:</p>
+           :
+           <span>
+            <p className="title-2" style={{marginTop : '2.5vh'}} >TEMPO RESTANTE DE PROVA</p>
+            <div className="subtitle-2">
+              <Timer time={endTime} />
+            </div>
+           </span>
+           }
           <div className="questions-recomend">
             <p className="title-2">
               QUESTÕES
@@ -124,7 +136,7 @@ const Exam = ({backendUrl}) => {
             {renderQuestionsButtons()}
           </div>
           <div className="submit-exam-button-container">
-            <button className="submit-exam-button" onClick={handleSubmit}>Entregar prova</button>
+            <button className="submit-exam-button" disabled={status == 2 ? true : false} style={ status == 2 ? {background: '#9f9f9f'} : {}} onClick={handleSubmit}>Entregar prova</button>
             <div style={{ display: (showSubmitLoadindSpinner ? 'flex' : 'none') }} className="submit-exam-spinner">
               <CircleLoader />
             </div>
@@ -141,6 +153,8 @@ const Exam = ({backendUrl}) => {
             question={questions[selectedQuestion].question}
             text={questions[selectedQuestion].text}
             answer={choices[selectedQuestion]}
+            cAnswer={answers[selectedQuestion]}
+            status={status}
             changeChoice={handleChoiceChange}
             changeQuestion={handleChangeQuestion}
             length = {questions.length}

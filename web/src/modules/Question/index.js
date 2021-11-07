@@ -1,7 +1,7 @@
 import './Question.css'
 import { AiFillCheckCircle } from 'react-icons/ai';
 
-const Question = ({ index, bloco, choices, question, text, answer, changeChoice, changeQuestion, length }) => {
+const Question = ({ index, bloco, choices, question, text, answer, cAnswer, status, changeChoice, changeQuestion, length }) => {
 
   const renderText = () => {
     return text.map((obj, i) => {
@@ -25,12 +25,18 @@ const Question = ({ index, bloco, choices, question, text, answer, changeChoice,
 
   const renderChoices = () => {
     return choices.map((obj, i) => {
-      return <div key={'choice' + i} className="choice-button" style={i === answer ? { background: '#E7EFFF' } : null} onClick={() => { changeChoice(i) }}>
+      return <div key={'choice' + i} className="choice-button" 
+      style={{
+        ...(status != 2 ? i === cAnswer ? { background: '#E7EFFF' } : null : null),
+        ...(status == 2 ? (i === cAnswer ? { background: '#3fed74' } : (i == answer && i != cAnswer ? {background: '#ff5f5f'} : null)) : null)
+      }} 
+      onClick={ status != 2 ? () => { changeChoice(i) } : null}>
         <div className="choice-button-info">
           <p>{String.fromCharCode(97 + Number(i))}. </p>
           <span>{obj}</span>
         </div>
-        <div className="choice-verified-icon" style={i === answer ? null : { opacity: '0%' }}>
+        <div className="choice-verified-icon" 
+        style={status != 2 ? (i === answer ? null : { opacity: '0%' }) : (i === cAnswer ? null : { opacity: '0%' })}>
           <AiFillCheckCircle />
         </div>
       </div>

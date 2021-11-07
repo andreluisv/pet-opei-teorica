@@ -51,7 +51,15 @@ const Login = ({backendUrl}) => {
       data.prova.startDate !== undefined &&
       data.prova.name !== undefined &&
       data.prova.questions !== undefined &&
-      data.status === 1;
+      data.status !== 0;
+  }
+
+  const returnAnswers = (data) => {
+    const answers = [... Array(data.length)];
+    data.forEach( (e, i) => {
+      answers[i] = e.answer;
+    });
+    return answers;
   }
 
   useEffect(() => {
@@ -65,10 +73,17 @@ const Login = ({backendUrl}) => {
     if (!validCpf || !validRa) return;
     setLoading(true);
     const cleanRA = sanitizeRa(ra), cleanCPF = sanitizeCpf(cpf);
+    const ano = new Date().getFullYear();
     var error = '', goToExam = false;
     try {
-      const req = await request.get(`${backendUrl}/user?ra=${cleanRA}&cpf=${cleanCPF}`);
+      // const req = await request.get(`${backendUrl}/user?ra=${cleanRA}&cpf=${cleanCPF}`);
+      const req = await request.post(`${backendUrl}/user/login`, {
+        ra: cleanRA,
+        cpf: cleanCPF,
+        ano: ano,
+      });
       const data = req.data;
+      console.log(req.data);
       if (req.status !== 200) {
         error = 'Problema na requisição, tente novamente.';
       } else if (data.error) {
@@ -81,6 +96,7 @@ const Login = ({backendUrl}) => {
         }
       } else {
         const resultCheck = checkCompleteExamDetails(data);
+
         if (resultCheck) {
           localStorage.setItem('opei-teorica', JSON.stringify({
             ok: true,
@@ -90,9 +106,12 @@ const Login = ({backendUrl}) => {
             date: data.prova.startDate,
             prova: data.prova.name,
             questions: data.prova.questions,
-            choices: Array.from({ length: data.prova.questions.length }, () => -1),
+            choices: data.status === 2 ? JSON.parse(data.choices) : Array.from({ length: data.prova.questions.length }, () => -1),
+            answers: data.status === 2 ? returnAnswers(data.prova.questions) : [],
             ra: cleanRA,
+            status: data.status,
             cpf: btoa(cleanCPF),
+            ano: ano
           }));
           goToExam = true;
         } else {
@@ -101,6 +120,7 @@ const Login = ({backendUrl}) => {
 
       }
     } catch (e) {
+      console.log(e);
       error = 'Erro de conexão, tente novamente.'
     }
     setError(error);
