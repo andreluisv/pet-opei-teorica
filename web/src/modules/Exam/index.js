@@ -73,7 +73,6 @@ const Exam = ({backendUrl}) => {
     }
     if (req.data === 'OK') {
       var dateAux = new Date();
-      console.log(dateAux);
       let date = `${String(dateAux.getDate()).padStart(2,'0')}/${String(dateAux.getMonth() + 1).padStart(2, '0')}/${dateAux.getFullYear()}`;
       let hour = `${dateAux.getHours()}:${String(dateAux.getMinutes()).padStart(2, '0')}:${dateAux.getSeconds()}`;
       txt = `Prova submetida com sucesso às: ${date} de ${hour}`;
@@ -114,7 +113,7 @@ const Exam = ({backendUrl}) => {
           <p className="title">{username}</p>
           <p className="subtitle">{examname}</p>
 
-          {status == 2 ?
+          {status === 2 ?
             <p className="title-2" style={{marginTop : '2.5vh'}} >GABARITO:</p>
            :
            <span>
@@ -136,7 +135,7 @@ const Exam = ({backendUrl}) => {
             {renderQuestionsButtons()}
           </div>
           <div className="submit-exam-button-container">
-            <button className="submit-exam-button" disabled={status == 2 ? true : false} style={ status == 2 ? {background: '#9f9f9f'} : {}} onClick={handleSubmit}>Entregar prova</button>
+            <button className="submit-exam-button" disabled={status === 2 ? true : false} style={ status === 2 ? {background: '#9f9f9f'} : {}} onClick={handleSubmit}>Entregar prova</button>
             <div style={{ display: (showSubmitLoadindSpinner ? 'flex' : 'none') }} className="submit-exam-spinner">
               <CircleLoader />
             </div>

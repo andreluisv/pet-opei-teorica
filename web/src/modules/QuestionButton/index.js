@@ -4,7 +4,7 @@ const QuestionButton = ({ index, choice, answer, click, selected, status }) => {
 
   return (
     <div className="question-button-box" onClick={() => { click(index) }} style={{
-      ...(status != 2 ? null : (choice == answer ? {background: '#13f767'} : {background: '#ff5f5f'})),
+      ...(status !== 2 ? null : (choice === answer ? {background: '#13f767'} : {background: '#ff5f5f'})),
       ...(selected ? { border: '2.5px solid #2756B6' }: null) 
       }}>
       <p className="question-button-title">Questão {index + 1}</p>

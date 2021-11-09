@@ -8,7 +8,7 @@ const Question = ({ index, bloco, choices, question, text, answer, cAnswer, stat
       if (obj.type === 'text')
         return <p key={'text-' + i}>{obj.data}</p>
       else if (obj.type === 'image')
-        return <img key={'img-' + i} src={obj.data}></img>
+        return <img alt="question" key={'img-' + i} src={obj.data}></img>
       return null;
     })
   }
@@ -18,7 +18,7 @@ const Question = ({ index, bloco, choices, question, text, answer, cAnswer, stat
       if (obj.type === 'text')
         return <p key={'text-' + i} style={{ fontWeight: '500' }}>{obj.data}</p>
       else if (obj.type === 'image')
-        return <img key={'img-' + i} src={obj.data}></img>
+        return <img alt="answer" key={'img-' + i} src={obj.data}></img>
       return null;
     })
   }
@@ -27,16 +27,16 @@ const Question = ({ index, bloco, choices, question, text, answer, cAnswer, stat
     return choices.map((obj, i) => {
       return <div key={'choice' + i} className="choice-button" 
       style={{
-        ...(status != 2 ? i === cAnswer ? { background: '#E7EFFF' } : null : null),
-        ...(status == 2 ? (i === cAnswer ? { background: '#3fed74' } : (i == answer && i != cAnswer ? {background: '#ff5f5f'} : null)) : null)
+        ...(status !== 2 ? i === cAnswer ? { background: '#E7EFFF' } : null : null),
+        ...(status === 2 ? (i === cAnswer ? { background: '#3fed74' } : (i === answer && i !== cAnswer ? {background: '#ff5f5f'} : null)) : null)
       }} 
-      onClick={ status != 2 ? () => { changeChoice(i) } : null}>
+      onClick={ status !== 2 ? () => { changeChoice(i) } : null}>
         <div className="choice-button-info">
           <p>{String.fromCharCode(97 + Number(i))}. </p>
           <span>{obj}</span>
         </div>
         <div className="choice-verified-icon" 
-        style={status != 2 ? (i === answer ? null : { opacity: '0%' }) : (i === cAnswer ? null : { opacity: '0%' })}>
+        style={status !== 2 ? (i === answer ? null : { opacity: '0%' }) : (i === cAnswer ? null : { opacity: '0%' })}>
           <AiFillCheckCircle />
         </div>
       </div>

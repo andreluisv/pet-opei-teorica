@@ -55,7 +55,7 @@ const Login = ({backendUrl}) => {
   }
 
   const returnAnswers = (data) => {
-    const answers = [... Array(data.length)];
+    const answers = [...Array(data.length)];
     data.forEach( (e, i) => {
       answers[i] = e.answer;
     });
@@ -63,18 +63,23 @@ const Login = ({backendUrl}) => {
   }
 
   useEffect(() => {
-    const local = JSON.parse(localStorage.getItem('opei-teorica'));
-    if (local && local.ok) {
-      history.push('/exam');
-    }
+    // const local = JSON.parse(localStorage.getItem('opei-teorica'));
+    // if (local && local.ok) {
+    //   history.push('/exam');
+    // }
   }, [])
 
-  const handleSubmit = async () => {
-    if (!validCpf || !validRa) return;
+  const handleSubmit = async (bypass) => {
+    if (bypass==undefined && (!validCpf || !validRa)) return;
     setLoading(true);
-    const cleanRA = sanitizeRa(ra), cleanCPF = sanitizeCpf(cpf);
+    var cleanRA = sanitizeRa(ra), cleanCPF = sanitizeCpf(cpf);
     const ano = new Date().getFullYear();
     var error = '', goToExam = false;
+    if (bypass==1){
+      cleanRA = "0"; cleanCPF = "00000000000";
+    }else if (bypass==2){
+      cleanRA = "1"; cleanCPF = "11111111111";
+    }
     try {
       // const req = await request.get(`${backendUrl}/user?ra=${cleanRA}&cpf=${cleanCPF}`);
       const req = await request.post(`${backendUrl}/user/login`, {
@@ -83,7 +88,6 @@ const Login = ({backendUrl}) => {
         ano: ano,
       });
       const data = req.data;
-      console.log(req.data);
       if (req.status !== 200) {
         error = 'Problema na requisição, tente novamente.';
       } else if (data.error) {
@@ -162,6 +166,14 @@ const Login = ({backendUrl}) => {
         {errorText ? <p className="error-dialog">{errorText}</p> : null}
       </div>
       <button onClick={handleSubmit} style={validCpf && validRa ? null : { background: 'grey', cursor: 'unset', transform: 'scale(1)' }} className="login-btn">Entrar</button>
+      <div>
+        <button onClick={()=>{
+          handleSubmit(1);
+        }} className="login-btn">Gabarito Fundamental</button>
+        <button onClick={()=>{
+          handleSubmit(2);
+        }} className="login-btn">Gabarito Medio</button>
+      </div>
       <div style={{ display: (loading ? 'flex' : 'none') }} className="blocker">
         <CircleLoader />
       </div>
